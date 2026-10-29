@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="script.js" defer></script>
+    <link rel="stylesheet" href="style.css" />
+    <title>Jeu des allumettes</title>
+  </head>
+  <body>
+    <h1 class="titre-jeu">Jeu des allumettes</h1>
+    <section class="regles">
+      <button class="btn-regles">Règles</button>
+      <p class="cache"></p>
+    </section>
+    <section class="settings">
+      <div class="joueurs">
+        <label for="nb-joueurs">Nombre de joueurs</label>
+        <input
+          type="number"
+          name="nb-joueurs"
+          id="nb-joueurs"
+          min="1"
+          max="6"
+          required
+        />
+      </div>
+      <button class="btn-new-game cache">Nouvelle partie</button>
+      <p class="joueur-courant cache">
+        C'est le tour de :
+        <span class="nom-joueur-courant">Joueur 1</span>
+      </p>
+    </section>
+    <section class="zone-jeu"></section>
+  </body>
+</html>
