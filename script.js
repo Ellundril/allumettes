@@ -6,6 +6,7 @@ const nbJoueurs = document.querySelector("#nb-joueurs");
 const affTourJoueur = document.querySelector(".joueur-courant");
 const tourJoueur = document.querySelector(".nom-joueur-courant");
 const btnValiderSelection = document.querySelector(".valider-selection");
+const affBatonsRestants = document.querySelector(".batons-restants");
 
 let allumettesRestantes = 50;
 let nbJoueurSelect;
@@ -99,6 +100,7 @@ btnValiderSelection.addEventListener("click", () => {
     suppressionAllumettes();
     retirerAllumettes(nbAllumettesSelectionnee);
     changementJoueur();
+    affBatonsRestants.textContent = `Il reste ${allumettesRestantes} bâtonnets`;
   }
 });
 
@@ -116,7 +118,9 @@ const retirerAllumettes = (nbAllumettes) => {
   allumettesRestantes -= nbAllumettes;
   nbAllumettesSelectionnee = 0;
   if (allumettesRestantes === 0) {
-    console.log(`La victoire revient au ${JoueurActif}`);
+    const victoire = document.createElement("p");
+    victoire.textContent = `La victoire revient à ${JoueurActif}`;
+    document.querySelector(".zone-jeu").appendChild(victoire);
   }
 };
 
