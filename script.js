@@ -8,7 +8,7 @@ const tourJoueur = document.querySelector(".nom-joueur-courant");
 const btnValiderSelection = document.querySelector(".valider-selection");
 const affBatonsRestants = document.querySelector(".batons-restants");
 const zoneJeu = document.querySelector(".zone-jeu");
-const victoire = document.querySelector(".victoire");
+const victoire = document.querySelector(".message");
 
 let allumettesRestantes = 50;
 let nbJoueurSelect;
@@ -57,6 +57,8 @@ const reset = () => {
   });
   tableauAllumettes = [];
   affBatonsRestants.textContent = "";
+  victoire.textContent = "";
+  victoire.classList.remove("victoire");
 };
 
 //Remplir le plateau avec les 50 allumettes
@@ -130,6 +132,7 @@ const retirerAllumettes = (nbAllumettes) => {
   allumettesRestantes -= nbAllumettes;
   nbAllumettesSelectionnee = 0;
   if (allumettesRestantes === 0) {
+    victoire.classList.add("victoire");
     victoire.innerHTML = `La victoire revient à 🎉 <strong>${JoueurActif} </strong>🎉 `;
   }
 };
