@@ -7,6 +7,8 @@ const affTourJoueur = document.querySelector(".joueur-courant");
 const tourJoueur = document.querySelector(".nom-joueur-courant");
 const btnValiderSelection = document.querySelector(".valider-selection");
 const affBatonsRestants = document.querySelector(".batons-restants");
+const zoneJeu = document.querySelector(".zone-jeu");
+const victoire = document.querySelector(".victoire");
 
 let allumettesRestantes = 50;
 let nbJoueurSelect;
@@ -15,6 +17,7 @@ let tableauAllumettes = [];
 let JoueurActif;
 let tabJoueur = [];
 let n = 0;
+
 //Sélection du nombre de joueur pour pouvoir commencer
 nbJoueurs.addEventListener("change", () => {
   btnNouvellePartie.classList.remove("cache");
@@ -41,14 +44,15 @@ const changementJoueur = () => {
 
 //Remise à zéro du jeu
 const reset = () => {
+  n = 0;
   allumettesRestantes = 50;
   nbAllumettesSelectionnee = 0;
   nbJoueurSelect = nbJoueurs.value;
   recupJoueur();
+  tourJoueur.textContent = JoueurActif;
   tableauAllumettes.forEach((allumette) => {
     if (!allumette.enlevee) {
       document.getElementById(allumette.id).remove();
-      console.log(!allumette.enlevee);
     }
   });
   tableauAllumettes = [];
@@ -72,6 +76,7 @@ const createBoardGame = () => {
     });
   });
   btnValiderSelection.classList.remove("cache");
+  zoneJeu.classList.remove("cache");
 };
 
 //selection des allumettes
@@ -84,14 +89,15 @@ const selectionneAllumette = (allumette, index) => {
   } else {
     nbAllumettesSelectionnee--;
   }
-  console.log(nbAllumettesSelectionnee);
 };
 
+//lancement d'une partie
 btnNouvellePartie.addEventListener("click", () => {
   reset();
   createBoardGame();
 });
 
+//validation des allumettes à enlever
 btnValiderSelection.addEventListener("click", () => {
   if (nbAllumettesSelectionnee === 0) {
     alert("Vous devez sélectionner au moins une allumette !");
@@ -105,26 +111,30 @@ btnValiderSelection.addEventListener("click", () => {
   }
 });
 
+//supprime les allumettes visuellement
 const suppressionAllumettes = () => {
   tableauAllumettes.forEach((allumettes) => {
     if (allumettes.select && !allumettes.enlevee) {
-      console.log("id allumetttes" + allumettes.id);
-      document.getElementById(`${allumettes.id}`).remove();
+      document.getElementById(`${allumettes.id}`).classList.add("suppression");
+      // document.getElementById(`${allumettes.id}`).remove();
       allumettes.enlevee = true;
+      setTimeout(() => {
+        document.getElementById(`${allumettes.id}`).remove();
+      }, 2500);
     }
   });
 };
 
+//supprime les allumettes du total et condition victoire
 const retirerAllumettes = (nbAllumettes) => {
   allumettesRestantes -= nbAllumettes;
   nbAllumettesSelectionnee = 0;
   if (allumettesRestantes === 0) {
-    const victoire = document.createElement("p");
-    victoire.textContent = `La victoire revient à ${JoueurActif}`;
-    document.querySelector(".zone-jeu").appendChild(victoire);
+    victoire.innerHTML = `La victoire revient à 🎉 <strong>${JoueurActif} </strong>🎉 `;
   }
 };
 
+//Affichage des règles
 btnRegles.addEventListener("click", () => {
   document.querySelector(".regle-jeu").classList.toggle("cache");
 });

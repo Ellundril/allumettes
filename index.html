@@ -10,7 +10,7 @@
   <body>
     <h1 class="titre-jeu">Jeu des bâtonnets</h1>
     <section class="regles">
-      <button class="btn-regles">Règles</button>
+      <button class="btn-regles btn">Règles</button>
       <p class="regle-jeu cache">
         Le but du jeu est d'être le joueur qui enlève le dernier bâtonnet.
         <br />
@@ -35,16 +35,17 @@
           required
         />
       </div>
-      <button class="btn-new-game cache">Nouvelle partie</button>
+      <button class="btn-new-game cache btn">Nouvelle partie</button>
       <p class="joueur-courant cache">
         C'est le tour de :
         <span class="nom-joueur-courant">Joueur 1</span>
       </p>
     </section>
-    <section class="zone-jeu">
-      <button class="valider-selection cache">Valider la sélection</button>
+    <section class="zone-jeu cache">
+      <button class="valider-selection btn cache">Valider la sélection</button>
       <p class="batons-restants"></p>
       <div class="container-allumettes"></div>
+      <p class="victoire"></p>
     </section>
   </body>
 </html>

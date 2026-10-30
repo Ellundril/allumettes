@@ -4,6 +4,9 @@
   box-sizing: border-box;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
+body {
+  background-color: blanchedalmond;
+}
 h1 {
   text-align: center;
   margin-top: 0.5rem;
@@ -56,11 +59,48 @@ h1 {
   border-radius: 20px;
 }
 
+.selection {
+  transform: translateY(-15px);
+  outline: 3px solid rgb(3, 136, 54);
+}
+
+.suppression {
+  animation: disparition 3s ease-in-out;
+  /* display: none; */
+}
+.victoire {
+  animation: victoire 3s ease-in-out;
+}
+
+.btn {
+  all: unset;
+  background-color: brown;
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+  color: white;
+  border: 2px solid white;
+  box-shadow: 2px 3px 2px black;
+  cursor: pointer;
+}
+
 .cache {
   display: none;
 }
 
-.selection {
-  transform: translateY(-15px);
-  outline: 2px solid rgb(23, 196, 89);
+@keyframes victoire {
+  from {
+    transform: none;
+  }
+  to {
+    transform: scale(3);
+  }
+}
+
+@keyframes disparition {
+  from {
+    transform: translateY(10px);
+  }
+  to {
+    transform: translateY(-1000px);
+  }
 }
