@@ -119,3 +119,7 @@ const retirerAllumettes = (nbAllumettes) => {
     console.log(`La victoire revient au ${JoueurActif}`);
   }
 };
+
+btnRegles.addEventListener("click", () => {
+  document.querySelector(".regle-jeu").classList.toggle("cache");
+});
