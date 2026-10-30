@@ -3,7 +3,8 @@ const btnNouvellePartie = document.querySelector(".btn-new-game");
 const plateauAllumettes = document.querySelector(".container-allumettes");
 const btnRegles = document.querySelector(".btn-regles");
 const nbJoueurs = document.querySelector("#nb-joueurs");
-const tourJoueur = document.querySelector(".joueur-courant");
+const affTourJoueur = document.querySelector(".joueur-courant");
+const tourJoueur = document.querySelector(".nom-joueur-courant");
 const btnValiderSelection = document.querySelector(".valider-selection");
 
 let allumettesRestantes = 50;
@@ -11,17 +12,38 @@ let nbJoueurSelect;
 let nbAllumettesSelectionnee;
 let tableauAllumettes = [];
 let JoueurActif;
+let tabJoueur = [];
+let n = 0;
 //Sélection du nombre de joueur pour pouvoir commencer
 nbJoueurs.addEventListener("change", () => {
   btnNouvellePartie.classList.remove("cache");
-  tourJoueur.classList.remove("cache");
+  affTourJoueur.classList.remove("cache");
   nbJoueurSelect = nbJoueurs.value;
+  recupJoueur();
 });
 
+//gestion des joueurs
+const recupJoueur = () => {
+  tabJoueur = [];
+  for (let i = 1; i <= nbJoueurSelect; i++) {
+    tabJoueur.push(`Joueur ${i}`);
+  }
+  console.log(tabJoueur);
+  JoueurActif = tabJoueur[n % nbJoueurSelect];
+};
+
+const changementJoueur = () => {
+  n++;
+  JoueurActif = tabJoueur[n % nbJoueurSelect];
+  tourJoueur.textContent = JoueurActif;
+};
+
+//Remise à zéro du jeu
 const reset = () => {
   allumettesRestantes = 50;
   nbAllumettesSelectionnee = 0;
   nbJoueurSelect = nbJoueurs.value;
+  recupJoueur();
   tableauAllumettes.forEach((allumette) => {
     if (!allumette.enlevee) {
       document.getElementById(allumette.id).remove();
@@ -30,6 +52,7 @@ const reset = () => {
   });
   tableauAllumettes = [];
 };
+
 //Remplir le plateau avec les 50 allumettes
 const createBoardGame = () => {
   nbAllumettesSelectionnee = 0;
@@ -75,6 +98,7 @@ btnValiderSelection.addEventListener("click", () => {
   } else {
     suppressionAllumettes();
     retirerAllumettes(nbAllumettesSelectionnee);
+    changementJoueur();
   }
 });
 
@@ -86,14 +110,12 @@ const suppressionAllumettes = () => {
       allumettes.enlevee = true;
     }
   });
-  nbAllumettesSelectionnee = 0;
 };
 
 const retirerAllumettes = (nbAllumettes) => {
   allumettesRestantes -= nbAllumettes;
-  if (estVictorieux) {
+  nbAllumettesSelectionnee = 0;
+  if (allumettesRestantes === 0) {
     console.log(`La victoire revient au ${JoueurActif}`);
   }
 };
-
-const estVictorieux = allumettesRestantes === 0;
