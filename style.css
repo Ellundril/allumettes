@@ -45,15 +45,15 @@ h1 {
 .container-allumettes {
   display: flex;
   flex-wrap: wrap;
-  gap: 2rem;
+  gap: 1.5rem;
   padding: 2rem 1rem;
 }
 .allumette {
   height: 100px;
-  width: 10px;
+  width: 20px;
   background-color: rgb(114, 68, 8);
   cursor: pointer;
-  border-radius: 5px;
+  border-radius: 20px;
 }
 
 .cache {

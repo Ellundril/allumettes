@@ -52,6 +52,7 @@ const reset = () => {
     }
   });
   tableauAllumettes = [];
+  affBatonsRestants.textContent = "";
 };
 
 //Remplir le plateau avec les 50 allumettes
